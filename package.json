@@ -1,6 +1,17 @@
 {
 	"name": "svelte-state-store",
 	"version": "0.0.1",
+	"homepage": "https://captaincodeman.github.io/svelte-state-store/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/captaincodeman/svelte-state-store.git"
+	},
+	"author": {
+		"name": "Simon Green",
+		"email": "simon@captaincodeman.com",
+		"url": "https://www.captaincodeman.com/"
+	},
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -9,8 +20,8 @@
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"lint": "prettier --check .",
+		"format": "prettier --write ."
 	},
 	"exports": {
 		".": {
@@ -30,9 +41,9 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"@sveltejs/package": "^2.0.0",
-		"prettier": "^2.8.0",
-		"prettier-plugin-svelte": "^2.10.1",
-		"publint": "^0.1.9",
+		"prettier": "^3.0.3",
+		"prettier-plugin-svelte": "^3.0.3",
+		"publint": "^0.2.5",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
 		"tslib": "^2.4.1",
