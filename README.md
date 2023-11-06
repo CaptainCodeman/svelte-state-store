@@ -1,58 +1,42 @@
-# create-svelte
+# svelte-state-store
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A [Svelte writable store](https://svelte.dev/docs/svelte-store#writable) that allows immediate access to the current state via a `value` getter.
+This avoids the need to use the less efficient `get(store)` and to access the current store value without having to setup a subscription which can sometimes be awkward.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+It can be useful where you need a store value but it isn't a dependency that would need to trigger an update or you would otherwise need to `get` the value inside a tight loop (e.g. a mouseover handler checking for the pointer being over objects that are within a store, to set the highlighted one). In certain situations it can help create simpler more efficient code.
 
-## Creating a project
+## Usage
 
-If you're seeing this, you've probably already done this step. Congrats!
+Install using your package-manager of choice, e.g.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+    pnpm i -D svelte-state-store
 
-# create a new project in my-app
-npm create svelte@latest my-app
+Import and use just as you would a regular `writable` store:
+
+```ts
+import { state } from 'svelte-state-store';
+
+export const my_store = state(123);
 ```
 
-## Developing
+You can now use the store as a regular `writable` store, subscribing to it for updates, and using it with `derived` stores, but you can also access the current value outside of a subscription using:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```ts
+console.log(my_store.value); // 123
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+If you need to define a type for your store, use `State` where you would have used `Writable`:
 
-## Building
+```ts
+import type { Writable } from 'svelte/store`
 
-To build your library:
-
-```bash
-npm run package
+function that_uses_store(store: Writable<StoreValue>) { }
 ```
 
-To create a production version of your showcase app:
+becomes ...
 
-```bash
-npm run build
-```
+```ts
+import type { Writable } from 'svelte-state-store`
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
+function that_uses_store(store: State<StoreValue>) { }
 ```
