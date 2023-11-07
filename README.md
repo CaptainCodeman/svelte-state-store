@@ -25,6 +25,8 @@ You can now use the store as a regular `writable` store, subscribing to it for u
 console.log(my_store.value); // 123
 ```
 
+You can pass a `StartStopNotifier` to the store, just as with a regular Svelte `writable` store.
+
 If you need to define a type for your store, use `State` where you would have used `Writable`:
 
 ```ts
@@ -36,7 +38,7 @@ function that_uses_store(store: Writable<StoreValue>) { }
 becomes ...
 
 ```ts
-import type { Writable } from 'svelte-state-store`
+import type { State } from 'svelte-state-store`
 
 function that_uses_store(store: State<StoreValue>) { }
 ```
